@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>X-ray Mirror</title>
+    <style>
+      :root {
+        --bg: #05080d;
+        --ink: #d9ecff;
+        --dim: #7f97ad;
+        --line: #1b2a3a;
+        --glow: #8fd6ff;
+        --panel: rgba(8, 14, 22, 0.78);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          13px/1.45 ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        overflow: hidden;
+      }
+      #stage {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+      }
+      #frame {
+        position: relative;
+        transform: scaleX(-1);
+        background: #000;
+      }
+      #frame.unmirrored {
+        transform: none;
+      }
+      #frame video,
+      #frame img,
+      #frame canvas,
+      #tint {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      #tint {
+        background: rgb(3, 9, 20);
+        opacity: 0.6;
+        pointer-events: none;
+      }
+      #panel {
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        width: 232px;
+        padding: 14px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+      }
+      h1 {
+        margin: 0 0 2px;
+        font-size: 13px;
+        letter-spacing: 0.22em;
+        font-weight: 600;
+        color: var(--glow);
+      }
+      #status {
+        color: var(--dim);
+        margin-bottom: 10px;
+        min-height: 1.45em;
+      }
+      label.row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 3px 0;
+        cursor: pointer;
+      }
+      label.row input {
+        accent-color: var(--glow);
+      }
+      .swatch {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-left: auto;
+      }
+      .group {
+        border-top: 1px solid var(--line);
+        margin-top: 10px;
+        padding-top: 10px;
+      }
+      .slider {
+        display: grid;
+        grid-template-columns: 74px 1fr;
+        align-items: center;
+        gap: 8px;
+        padding: 2px 0;
+        color: var(--dim);
+      }
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--glow);
+      }
+      .seg {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .seg button {
+        border: 0;
+        background: none;
+        color: var(--dim);
+        font: inherit;
+        padding: 5px;
+        cursor: pointer;
+      }
+      .seg button.on {
+        background: rgba(143, 214, 255, 0.16);
+        color: var(--ink);
+      }
+      details summary {
+        cursor: pointer;
+        color: var(--dim);
+      }
+      button.link {
+        border: 0;
+        background: none;
+        color: var(--dim);
+        font: inherit;
+        padding: 4px 0 0;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      #activity {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        width: 232px;
+        padding: 14px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+      }
+      .est {
+        color: #ffcf7a;
+        margin-bottom: 8px;
+      }
+      .brainbox {
+        position: relative;
+        height: 170px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.35);
+      }
+      .brainbox canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .lr {
+        position: absolute;
+        top: 4px;
+        color: var(--dim);
+        font-size: 11px;
+      }
+      #brainList {
+        min-height: 4.4em;
+        padding-top: 6px;
+      }
+      .bar {
+        display: grid;
+        grid-template-columns: 1fr 70px;
+        align-items: center;
+        gap: 8px;
+        padding: 1px 0;
+      }
+      .bar i {
+        color: var(--dim);
+        font-style: normal;
+      }
+      .bar b {
+        height: 6px;
+        background: var(--line);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .bar u {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, #ff5a45, #ffe066);
+      }
+      .none,
+      .note {
+        color: var(--dim);
+      }
+      .note {
+        font-size: 11px;
+        margin-top: 10px;
+      }
+      /* narrow windows: drop the brain view and bars, keep the "estimate" label */
+      @media (max-width: 900px) {
+        #activity {
+          top: auto;
+          right: auto;
+          left: 12px;
+          bottom: 56px;
+          width: auto;
+          max-width: 60vw;
+          padding: 6px 10px;
+        }
+        #activity > :not(.est) {
+          display: none;
+        }
+      }
+      #start {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: rgba(5, 8, 13, 0.92);
+        text-align: center;
+        z-index: 5;
+      }
+      #start[hidden] {
+        display: none;
+      }
+      #start button {
+        font: inherit;
+        font-size: 14px;
+        letter-spacing: 0.18em;
+        color: var(--bg);
+        background: var(--glow);
+        border: 0;
+        border-radius: 999px;
+        padding: 13px 26px;
+        cursor: pointer;
+      }
+      #start p {
+        color: var(--dim);
+        max-width: 38ch;
+        margin: 14px auto 0;
+      }
+      #credit {
+        position: fixed;
+        right: 14px;
+        bottom: 10px;
+        color: var(--dim);
+        font-size: 11px;
+        text-align: right;
+        max-width: 60ch;
+      }
+      @media (max-width: 640px) {
+        #panel {
+          width: auto;
+          right: 16px;
+        }
+        #credit {
+          left: 14px;
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stage">
+      <div id="frame">
+        <div id="tint"></div>
+        <canvas id="gl"></canvas>
+      </div>
+    </div>
+
+    <div id="panel">
+      <h1>X-RAY MIRROR</h1>
+      <div id="status">Loading…</div>
+      <label class="row"
+        ><input type="checkbox" data-layer="skull" checked />Skull<span
+          class="swatch"
+          style="background: #bfe6ff"
+        ></span
+      ></label>
+      <label class="row"
+        ><input type="checkbox" data-layer="brain" checked />Brain<span
+          class="swatch"
+          style="background: #ff8ca6"
+        ></span
+      ></label>
+      <label class="row"
+        ><input type="checkbox" data-layer="muscles" checked />Eye &amp; neck
+        muscles<span class="swatch" style="background: #ff5a45"></span
+      ></label>
+      <label class="row"
+        ><input type="checkbox" data-layer="eyes" checked />Eyes<span
+          class="swatch"
+          style="background: #9affe0"
+        ></span
+      ></label>
+      <label class="row"
+        ><input type="checkbox" data-layer="hands" checked />Hand bones<span
+          class="swatch"
+          style="background: #bfe6ff"
+        ></span
+      ></label>
+      <label class="row"
+        ><input type="checkbox" data-layer="body" checked />Body skeleton<span
+          class="swatch"
+          style="background: #bfe6ff"
+        ></span
+      ></label>
+      <label class="row"
+        ><input type="checkbox" data-layer="bodyMuscles" checked />Body
+        muscles<span class="swatch" style="background: #ffb347"></span
+      ></label>
+      <div class="group">
+        <div class="seg">
+          <button data-style="xray" class="on">X-ray</button
+          ><button data-style="solid">Solid</button>
+        </div>
+        <div class="slider" style="margin-top: 8px">
+          <span>Dim video</span
+          ><input
+            id="dim"
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.6"
+          />
+        </div>
+      </div>
+      <div class="group">
+        <details>
+          <summary>Fit to my face</summary>
+          <div class="slider">
+            <span>Size</span
+            ><input
+              data-fit="scale"
+              type="range"
+              min="0.85"
+              max="1.15"
+              step="0.005"
+              value="1"
+            />
+          </div>
+          <div class="slider">
+            <span>Up / down</span
+            ><input
+              data-fit="y"
+              type="range"
+              min="-2"
+              max="2"
+              step="0.05"
+              value="0"
+            />
+          </div>
+          <div class="slider">
+            <span>Depth</span
+            ><input
+              data-fit="z"
+              type="range"
+              min="-2"
+              max="2"
+              step="0.05"
+              value="0"
+            />
+          </div>
+          <div class="slider">
+            <span>Tilt</span
+            ><input
+              data-fit="tilt"
+              type="range"
+              min="-15"
+              max="15"
+              step="0.5"
+              value="0"
+            />
+          </div>
+          <button class="link" id="resetFit">Reset</button>
+        </details>
+      </div>
+    </div>
+
+    <div id="activity">
+      <h1>ACTIVITY</h1>
+      <div class="est">Estimated from movement, not a measurement.</div>
+      <div class="brainbox">
+        <canvas id="brainView"></canvas>
+        <span class="lr" style="left: 6px">L</span>
+        <span class="lr" style="right: 6px">R</span>
+      </div>
+      <div id="brainList"></div>
+      <div class="group" id="bars"></div>
+      <div class="note">
+        Muscles: from joint angles, gravity and acceleration. Brain: textbook
+        map of which area handles which body part. Neither is read from your
+        body.
+      </div>
+    </div>
+
+    <div id="start" hidden>
+      <div>
+        <button id="startBtn">START CAMERA</button>
+        <p>
+          Everything runs in this page. The video is processed on your computer
+          and is never uploaded.
+        </p>
+      </div>
+    </div>
+
+    <div id="credit">
+      Anatomy models: BodyParts3D, © The Database Center for Life Science, CC
+      BY-SA 2.1 Japan (decimated).
+    </div>
+
+    <script type="importmap">
+      { "imports": { "three": "./vendor/three/three.module.js" } }
+    </script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+raw/
+tools/node_modules/
+test/
+.claude/
+.gstack/
+.wrangler/
+.DS_Store
+tasks/
