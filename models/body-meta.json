@@ -1,0 +1,320 @@
+{
+ "attribution": "BodyParts3D, © The Database Center for Life Science, licensed under CC Attribution-Share Alike 2.1 Japan",
+ "units": "mm; +x subject's left, +y up, +z anterior",
+ "torso": {
+  "shoulderL": [
+   166.2,
+   1333.5,
+   77.4
+  ],
+  "hipL": [
+   75.6,
+   825,
+   78
+  ],
+  "shoulderR": [
+   -167,
+   1333.3,
+   76.3
+  ],
+  "hipR": [
+   -74.9,
+   823.5,
+   77.3
+  ]
+ },
+ "segments": {
+  "upperarm_L": {
+   "prox": [
+    166.2,
+    1333.5,
+    77.4
+   ],
+   "dist": [
+    201.4,
+    1032.9,
+    71.2
+   ]
+  },
+  "forearm_L": {
+   "prox": [
+    201.4,
+    1032.9,
+    71.2
+   ],
+   "dist": [
+    256,
+    806.2,
+    114.5
+   ]
+  },
+  "thigh_L": {
+   "prox": [
+    75.6,
+    825,
+    78
+   ],
+   "dist": [
+    60.4,
+    371.9,
+    74.9
+   ]
+  },
+  "shin_L": {
+   "prox": [
+    60.4,
+    371.9,
+    74.9
+   ],
+   "dist": [
+    53.1,
+    -3,
+    82.7
+   ]
+  },
+  "foot_L": {
+   "prox": [
+    66.6,
+    -38,
+    44.3
+   ],
+   "dist": [
+    127.4,
+    -67,
+    231.8
+   ]
+  },
+  "upperarm_R": {
+   "prox": [
+    -167,
+    1333.3,
+    76.3
+   ],
+   "dist": [
+    -200.3,
+    1032.7,
+    71.3
+   ]
+  },
+  "forearm_R": {
+   "prox": [
+    -200.3,
+    1032.7,
+    71.3
+   ],
+   "dist": [
+    -256.1,
+    806.2,
+    114.9
+   ]
+  },
+  "thigh_R": {
+   "prox": [
+    -74.9,
+    823.5,
+    77.3
+   ],
+   "dist": [
+    -63,
+    372.3,
+    75.3
+   ]
+  },
+  "shin_R": {
+   "prox": [
+    -63,
+    372.3,
+    75.3
+   ],
+   "dist": [
+    -52.5,
+    -2.8,
+    82
+   ]
+  },
+  "foot_R": {
+   "prox": [
+    -67.7,
+    -38.7,
+    45.9
+   ],
+   "dist": [
+    -127.1,
+    -66.9,
+    232
+   ]
+  }
+ },
+ "muscles": {
+  "m_deltoid_L": {
+   "group": "deltoid",
+   "side": "L",
+   "segment": "upperarm_L"
+  },
+  "m_deltoid_R": {
+   "group": "deltoid",
+   "side": "R",
+   "segment": "upperarm_R"
+  },
+  "m_biceps_L": {
+   "group": "biceps",
+   "side": "L",
+   "segment": "upperarm_L"
+  },
+  "m_biceps_R": {
+   "group": "biceps",
+   "side": "R",
+   "segment": "upperarm_R"
+  },
+  "m_triceps_L": {
+   "group": "triceps",
+   "side": "L",
+   "segment": "upperarm_L"
+  },
+  "m_triceps_R": {
+   "group": "triceps",
+   "side": "R",
+   "segment": "upperarm_R"
+  },
+  "m_forearm_L": {
+   "group": "forearm",
+   "side": "L",
+   "segment": "forearm_L"
+  },
+  "m_forearm_R": {
+   "group": "forearm",
+   "side": "R",
+   "segment": "forearm_R"
+  },
+  "m_pecs_L": {
+   "group": "pecs",
+   "side": "L",
+   "segment": "torso"
+  },
+  "m_pecs_R": {
+   "group": "pecs",
+   "side": "R",
+   "segment": "torso"
+  },
+  "m_traps_L": {
+   "group": "traps",
+   "side": "L",
+   "segment": "torso"
+  },
+  "m_traps_R": {
+   "group": "traps",
+   "side": "R",
+   "segment": "torso"
+  },
+  "m_lats_L": {
+   "group": "lats",
+   "side": "L",
+   "segment": "torso"
+  },
+  "m_lats_R": {
+   "group": "lats",
+   "side": "R",
+   "segment": "torso"
+  },
+  "m_serratus_L": {
+   "group": "serratus",
+   "side": "L",
+   "segment": "torso"
+  },
+  "m_serratus_R": {
+   "group": "serratus",
+   "side": "R",
+   "segment": "torso"
+  },
+  "m_obliques_L": {
+   "group": "obliques",
+   "side": "L",
+   "segment": "torso"
+  },
+  "m_obliques_R": {
+   "group": "obliques",
+   "side": "R",
+   "segment": "torso"
+  },
+  "m_erectors_L": {
+   "group": "erectors",
+   "side": "L",
+   "segment": "torso"
+  },
+  "m_erectors_R": {
+   "group": "erectors",
+   "side": "R",
+   "segment": "torso"
+  },
+  "m_glutes_L": {
+   "group": "glutes",
+   "side": "L",
+   "segment": "pelvis"
+  },
+  "m_glutes_R": {
+   "group": "glutes",
+   "side": "R",
+   "segment": "pelvis"
+  },
+  "m_hipflex_L": {
+   "group": "hipflex",
+   "side": "L",
+   "segment": "thigh_L"
+  },
+  "m_hipflex_R": {
+   "group": "hipflex",
+   "side": "R",
+   "segment": "thigh_R"
+  },
+  "m_quads_L": {
+   "group": "quads",
+   "side": "L",
+   "segment": "thigh_L"
+  },
+  "m_quads_R": {
+   "group": "quads",
+   "side": "R",
+   "segment": "thigh_R"
+  },
+  "m_hamstrings_L": {
+   "group": "hamstrings",
+   "side": "L",
+   "segment": "thigh_L"
+  },
+  "m_hamstrings_R": {
+   "group": "hamstrings",
+   "side": "R",
+   "segment": "thigh_R"
+  },
+  "m_adductors_L": {
+   "group": "adductors",
+   "side": "L",
+   "segment": "thigh_L"
+  },
+  "m_adductors_R": {
+   "group": "adductors",
+   "side": "R",
+   "segment": "thigh_R"
+  },
+  "m_calves_L": {
+   "group": "calves",
+   "side": "L",
+   "segment": "shin_L"
+  },
+  "m_calves_R": {
+   "group": "calves",
+   "side": "R",
+   "segment": "shin_R"
+  },
+  "m_tibialis_L": {
+   "group": "tibialis",
+   "side": "L",
+   "segment": "shin_L"
+  },
+  "m_tibialis_R": {
+   "group": "tibialis",
+   "side": "R",
+   "segment": "shin_R"
+  }
+ }
+}

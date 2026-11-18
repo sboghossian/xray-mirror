@@ -1,0 +1,196 @@
+{
+  "attribution": "BodyParts3D, © The Database Center for Life Science, licensed under CC Attribution-Share Alike 2.1 Japan",
+  "head": {
+    "units": "cm, MediaPipe canonical face space",
+    "scale": 1.11574,
+    "jawHinge": [-0.077, 0.82, -3.808],
+    "strips": {
+      "m1_L": [7.439, 13.856],
+      "m1_R": [7.293, 13.863],
+      "s1_L": [7.644, 13.667],
+      "s1_R": [7.75, 13.682]
+    },
+    "brainCentre": [-0.14, 7.75, -6.094]
+  },
+  "hand": {
+    "units": "mm",
+    "rest": {
+      "wrist": [5.815, 14.468, -4.955],
+      "mcp": [
+        [-50.223, -32.488, 26.293],
+        [-31.225, -75.877, 16.293],
+        [-11.006, -74.381, 15.314],
+        [8.03, -70.572, 13.61],
+        [24.726, -62.939, 18.171]
+      ],
+      "thumbCmc": [-20.096, -1.572, 6.749]
+    },
+    "bones": [
+      {
+        "name": "carpal_capitate",
+        "kind": "carpal"
+      },
+      {
+        "name": "carpal_hamate",
+        "kind": "carpal"
+      },
+      {
+        "name": "carpal_lunate",
+        "kind": "carpal"
+      },
+      {
+        "name": "carpal_pisiform",
+        "kind": "carpal"
+      },
+      {
+        "name": "carpal_scaphoid",
+        "kind": "carpal"
+      },
+      {
+        "name": "carpal_trapezium",
+        "kind": "carpal"
+      },
+      {
+        "name": "carpal_trapezoid",
+        "kind": "carpal"
+      },
+      {
+        "name": "carpal_triquetral",
+        "kind": "carpal"
+      },
+      {
+        "name": "mc_0",
+        "kind": "mc",
+        "finger": 0,
+        "prox": [-20.096, -1.572, 6.749],
+        "dist": [-50.223, -32.488, 26.293]
+      },
+      {
+        "name": "prox_0",
+        "kind": "prox",
+        "finger": 0,
+        "prox": [-48.626, -31.265, 25.904],
+        "dist": [-60.495, -57.734, 38.005]
+      },
+      {
+        "name": "dist_0",
+        "kind": "dist",
+        "finger": 0,
+        "prox": [-57.578, -55.642, 38.691],
+        "dist": [-67.765, -75.379, 49.761]
+      },
+      {
+        "name": "mc_1",
+        "kind": "mc",
+        "finger": 1,
+        "prox": [-12.953, -8.719, 1.312],
+        "dist": [-31.225, -75.877, 16.293]
+      },
+      {
+        "name": "prox_1",
+        "kind": "prox",
+        "finger": 1,
+        "prox": [-32.492, -73.713, 15.793],
+        "dist": [-44.599, -108.016, 32.57]
+      },
+      {
+        "name": "mid_1",
+        "kind": "mid",
+        "finger": 1,
+        "prox": [-43.99, -106.456, 31.55],
+        "dist": [-51.26, -122.848, 49.311]
+      },
+      {
+        "name": "dist_1",
+        "kind": "dist",
+        "finger": 1,
+        "prox": [-50.597, -121.187, 48.924],
+        "dist": [-53.346, -132.534, 64.101]
+      },
+      {
+        "name": "mc_2",
+        "kind": "mc",
+        "finger": 2,
+        "prox": [-2.916, -9.784, -5.075],
+        "dist": [-11.006, -74.381, 15.314]
+      },
+      {
+        "name": "prox_2",
+        "kind": "prox",
+        "finger": 2,
+        "prox": [-11.876, -72.458, 16.366],
+        "dist": [-17.711, -110.185, 40.043]
+      },
+      {
+        "name": "mid_2",
+        "kind": "mid",
+        "finger": 2,
+        "prox": [-16.904, -108.598, 38.732],
+        "dist": [-20.736, -132.066, 57.673]
+      },
+      {
+        "name": "dist_2",
+        "kind": "dist",
+        "finger": 2,
+        "prox": [-20.711, -130.524, 57.594],
+        "dist": [-22.394, -140.9, 72.701]
+      },
+      {
+        "name": "mc_3",
+        "kind": "mc",
+        "finger": 3,
+        "prox": [5.111, -11.657, -2.426],
+        "dist": [8.03, -70.572, 13.61]
+      },
+      {
+        "name": "prox_3",
+        "kind": "prox",
+        "finger": 3,
+        "prox": [7.788, -67.845, 17.819],
+        "dist": [6.251, -104.947, 37.201]
+      },
+      {
+        "name": "mid_3",
+        "kind": "mid",
+        "finger": 3,
+        "prox": [7.635, -103.198, 37.263],
+        "dist": [4.865, -125.195, 57.688]
+      },
+      {
+        "name": "dist_3",
+        "kind": "dist",
+        "finger": 3,
+        "prox": [5.991, -123.283, 57.348],
+        "dist": [4.443, -129.548, 71.92]
+      },
+      {
+        "name": "mc_4",
+        "kind": "mc",
+        "finger": 4,
+        "prox": [14.423, -9.65, 1.941],
+        "dist": [24.726, -62.939, 18.171]
+      },
+      {
+        "name": "prox_4",
+        "kind": "prox",
+        "finger": 4,
+        "prox": [25.651, -60.679, 20.104],
+        "dist": [29.326, -91.633, 34.763]
+      },
+      {
+        "name": "mid_4",
+        "kind": "mid",
+        "finger": 4,
+        "prox": [28.461, -89.983, 35.359],
+        "dist": [34.333, -107.363, 48.594]
+      },
+      {
+        "name": "dist_4",
+        "kind": "dist",
+        "finger": 4,
+        "prox": [31.221, -106.935, 47.424],
+        "dist": [33.186, -117.862, 59.111]
+      }
+    ]
+  }
+}
